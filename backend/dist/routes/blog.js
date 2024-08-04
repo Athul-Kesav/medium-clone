@@ -14,7 +14,6 @@ blogRouter.use("/*", async (c, next) => {
     const token = auth.split(" ")[1];
     try {
         const user = await verify(token, c.env.JWT_SECRET);
-        //@ts-ignore
         c.set("userId", user.id);
         await next();
     }
