@@ -1,8 +1,10 @@
-```
-npm install
-npm run dev
-```
+# My Medium Blogging Page Clone
 
-```
-npm run deploy
-```
+- Learn to use Cloudflare Workers to host backend
+- Using prisma to handle a PostgreSWL database
+
+## Latest Updates
+
+- Added the backend for signup, signin, blog create/fetch/update/fetchAll
+- Deletion is yet to be added
+- Frontend to be designed shortly

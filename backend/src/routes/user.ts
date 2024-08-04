@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono';
 import { sign } from 'hono/jwt'
-
+import { signupInput, signinInput } from '@athul-kesav/medium-commons';
 const userRouter = new Hono<{
     Bindings: {
       DATABASE_URL: string,
@@ -17,12 +17,20 @@ userRouter.post('/signup', async (c) => {
     }).$extends(withAccelerate());
   
     const body = await c.req.json();
+    const parsedBody = signupInput.safeParse(body);
+    if(!parsedBody.success){
+      c.status(411);
+      return c.json({
+        message: "Invalid Input(s)",
+      })
+    }
   
     try {
       const user = await prisma.user.create({
         data: {
           email: body.email,
-          password: body.password
+          password: body.password,
+          name: body.name
         },
       });
       const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
@@ -40,6 +48,14 @@ userRouter.post('/signup', async (c) => {
     }).$extends(withAccelerate());
   
     const body = await c.req.json();
+
+    const parsedBody = signinInput.safeParse(body);
+    if(!parsedBody.success){
+      c.status(411);
+      return c.json({
+        message: "Invalid Input(s)",
+      })
+    }
   
     const user = await prisma.user.findUnique({
       where: {
@@ -55,7 +71,7 @@ userRouter.post('/signup', async (c) => {
   
     const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
     return c.json({
-      msg: "Login Successful",
+      msg: "Login parsedBodyful",
       jwt: `Bearer ${jwt}`,
     });
   })
