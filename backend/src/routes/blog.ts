@@ -36,7 +36,7 @@ blogRouter.use("/*", async (c, next) => {
 })
 
 //Create a new post
-blogRouter.post('/', async (c) => {
+blogRouter.post('/add', async (c) => {
 
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
