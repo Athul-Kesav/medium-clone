@@ -27,8 +27,7 @@ blogRouter.use("/*", async (c, next) => {
 
     try {
         const user = await verify(token, c.env.JWT_SECRET);
-        //@ts-ignore
-        c.set("userId", user.id);
+        c.set("userId", user.id as string);
         await next()
     } catch (e) {
         c.status(403);
