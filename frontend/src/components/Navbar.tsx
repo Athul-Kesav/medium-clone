@@ -15,7 +15,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center">
         <div className="flex cursor-pointer items-center hover:text-[#000] group mx-1">
-          <img src={writeIcon} alt="writeIcon" className="size-6 opacity-75 group-hover:opacity-100" />
+          <img src={writeIcon} alt="writeIcon" className="size-6 opacity-75 group-hover:opacity-100 mx-1" />
           <h3 className="text-[#21212175] font-charter group-hover:text-[#21212195]">
             Write
           </h3>
